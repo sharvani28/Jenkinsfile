@@ -18,12 +18,15 @@ pipeline {
                 echo "Run unit tests to ensure the code functions as expected and run integration tests to ensure the different components of the application work together as expected. Tools: JUnit (Unit Tests), Selenium (Integration Tests)"
                 
             }
-            post{
-                success{
-                    mail to: "sharvanikandala@gmail.com",
-                    subject: "Tests status email",
-                    body: "Tests were successful",
-		    attachBuildLog: true
+           post {
+                success {
+                    script {
+                        // Attach the build log to the success email
+                        emailext attachmentsPattern: '**/*.log', 
+                            body: "Unit and Integration Tests were successful",
+                            subject: "Unit and Integration Tests Succeeded",
+                            to: "sharvanikandala@gmail.com"
+                    }
                 }
             }
         }
@@ -43,7 +46,7 @@ pipeline {
                     mail to: "sharvanikandala@gmail.com",
                     subject: "Security scan status email",
                     body: "Security scans were successful",
-		    attachBuildLog: true
+		    
                 }
             }
         }
