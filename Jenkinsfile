@@ -19,21 +19,20 @@ pipeline {
                 post {
         		failure {
             			// Send email notification for overall pipeline failure
-            			emailext(
                 			subject: 'Unit and Integration Tests Failed',
                 			body: 'The pipeline has failed. Please investigate.',
                 			to: 'sharvanikandala@gmail.com',
                 			attachLog: true // Attach build log
-            				)
+            				
         			}
         		success {
             			// Send email notification for successful pipeline completion
-           			 emailext(
+           			 
                 			subject: 'Unit and Integration Tests Succeeded',
                 			body: 'The pipeline has succeeded.',
                 			to: 'sharvanikandala@gmail.com',
                 			attachLog: true // Attach build log
-           				 )
+           				 
        				 }
            	 }
         }
