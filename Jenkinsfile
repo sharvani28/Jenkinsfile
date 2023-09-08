@@ -37,6 +37,14 @@ pipeline {
             steps {
                 echo "Perform a security scan on the code using a tool to identify any vulnerabilities. Tool: OWASP ZAP "
             }
+	    post{
+               always{
+            emailext to: "sharvanikandala@gmail.com",
+            subject: "Security scan Email",
+            body: "Security Scan successful",
+            attachLog: true
+        }
+    }
         }
         
         stage('Deploy to Staging') {
