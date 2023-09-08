@@ -17,21 +17,14 @@ pipeline {
             steps {
                 echo "Run unit tests to ensure the code functions as expected and run integration tests to ensure the different components of the application work together as expected. Tools: JUnit (Unit Tests), Selenium (Integration Tests)"
             }
-            post {
-                success {
-                    script {
-                        // Attach the build log to the success email
-                        emailext(
-                            subject: "Tests status email",
-                            body: "Tests were successful",
-                            mimeType: 'text/plain',
-                            to: "sharvanikandala@gmail.com"
-                        ) {
-                            attachLog()
-                        }
-                    }
-                }
-            }
+            post{
+        always{
+            emailext to: "sharvanikandala@gmail.com",
+            subject: "Test Email",
+            body: "Test",
+            attachLog: true
+        }
+    }
         }
         
         stage('Code Analysis') {
