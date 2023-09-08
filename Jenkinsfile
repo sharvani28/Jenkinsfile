@@ -16,8 +16,26 @@ pipeline {
         stage('Unit and Integration Tests') {
             steps {
                 echo "Run unit tests to ensure the code functions as expected and run integration tests to ensure the different components of the application work together as expected. Tools: JUnit (Unit Tests), Selenium (Integration Tests)"
-                
-            }
+                post {
+        		failure {
+            			// Send email notification for overall pipeline failure
+            			emailext(
+                			subject: 'Unit and Integration Tests Failed',
+                			body: 'The pipeline has failed. Please investigate.',
+                			to: 'sharvanikandala@gmail.com',
+                			attachLog: true // Attach build log
+            				)
+        			}
+        		success {
+            			// Send email notification for successful pipeline completion
+           			 emailext(
+                			subject: 'Unit and Integration Tests Succeeded',
+                			body: 'The pipeline has succeeded.',
+                			to: 'sharvanikandala@gmail.com',
+                			attachLog: true // Attach build log
+           				 )
+       				 }
+           	 }
         }
         
         stage('Code Analysis') {
@@ -29,6 +47,26 @@ pipeline {
         stage('Security Scan') {
             steps {
                 echo "Perform a security scan on the code using a tool to identify any vulnerabilities. Tool: OWASP ZAP "
+		post {
+        		failure {
+            			// Send email notification for overall pipeline failure
+            			emailext(
+                			subject: 'Security scan Failed',
+                			body: 'The pipeline has failed. Please investigate.',
+                			to: 'sharvanikandala@gmail.com',
+                			attachLog: true // Attach build log
+            				)
+        			}
+        		success {
+            			// Send email notification for successful pipeline completion
+           			 emailext(
+                			subject: 'Security scan Succeeded',
+                			body: 'The pipeline has succeeded.',
+                			to: 'sharvanikandala@gmail.com',
+                			attachLog: true // Attach build log
+           				 )
+       				 }
+           	 }
             }
         }
         
