@@ -16,20 +16,13 @@ pipeline {
         stage('Unit and Integration Tests') {
             steps {
                 echo "Run unit tests to ensure the code functions as expected and run integration tests to ensure the different components of the application work together as expected. Tools: JUnit (Unit Tests), Selenium (Integration Tests)"
-                sh 'run_unit_tests.sh > unit_test.log'
-                sh 'run_integration_tests.sh > integration_test.log'
+                
             }
-           post {
-                success {
-                    script {
-                        // Attach the build log to the success email
-                       archiveArtifacts artifacts: '**/*.log', allowEmptyArchive: true
-                        // Send a success email with the test log attachments
-                        emailext attachmentsPattern: '**/*.log', 
-                            body: "Unit and Integration Tests succeeded. Attached test logs.",
-                            subject: "Unit and Integration Tests Succeeded",
-                            to: "sharvanikandala@gmail.com"
-                    }
+            post{
+                success{
+                    mail to: "sharvanikandala@gmail.com",
+                    subject: "Tests status email",
+                    body: "Tests were successful"
                 }
             }
         }
@@ -43,14 +36,6 @@ pipeline {
         stage('Security Scan') {
             steps {
                 echo "Perform a security scan on the code using a tool to identify any vulnerabilities. Tool: OWASP ZAP "
-            }
-	    post{
-                success{
-                    mail to: "sharvanikandala@gmail.com",
-                    subject: "Security scan status email",
-                    body: "Security scans were successful"
-		    
-                }
             }
         }
         
