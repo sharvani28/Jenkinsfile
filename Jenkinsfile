@@ -20,6 +20,7 @@ pipeline {
             }
             post{
                 success{
+		    emailext attachmentsPattern: '**/*.log',
                     mail to: "sharvanikandala@gmail.com",
                     subject: "Tests status email",
                     body: "Tests were successful"
