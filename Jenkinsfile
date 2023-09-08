@@ -20,10 +20,13 @@ pipeline {
             }
             post{
                 success{
-		    emailext attachmentsPattern: '**/*.log',
-                    mail to: "sharvanikandala@gmail.com",
-                    subject: "Tests status email",
-                    body: "Tests were successful"
+		    script {
+                        // Attach the build log to the success email
+                        emailext attachmentsPattern: '**/*.log', 
+                            body: "Tests were successful",
+                            subject: "Tests status email",
+                            to: "sharvanikandala@gmail.com"
+                    }
                 }
             }
         }
