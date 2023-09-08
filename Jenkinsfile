@@ -43,6 +43,16 @@ pipeline {
             steps {
                 echo "Deploy the code to the production environment using the environment variable specifying the environment name"
             }
+            
         }
+        stage('Complete') {
+            steps {
+                echo "Complete"
+            }
+            
+        }
+        
+        
+        
     }
 }
