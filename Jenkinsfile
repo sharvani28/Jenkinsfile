@@ -23,8 +23,10 @@ pipeline {
                 success {
                     script {
                         // Attach the build log to the success email
+                       archiveArtifacts artifacts: '**/*.log', allowEmptyArchive: true
+                        // Send a success email with the test log attachments
                         emailext attachmentsPattern: '**/*.log', 
-                            body: "Unit and Integration Tests were successful",
+                            body: "Unit and Integration Tests succeeded. Attached test logs.",
                             subject: "Unit and Integration Tests Succeeded",
                             to: "sharvanikandala@gmail.com"
                     }
