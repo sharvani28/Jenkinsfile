@@ -22,7 +22,8 @@ pipeline {
                 success{
                     mail to: "sharvanikandala@gmail.com",
                     subject: "Tests status email",
-                    body: "Tests were successful"
+                    body: "Tests were successful",
+		    attachLog: true
                 }
             }
         }
@@ -41,7 +42,8 @@ pipeline {
                 success{
                     mail to: "sharvanikandala@gmail.com",
                     subject: "Security scan status email",
-                    body: "Security scans were successful"
+                    body: "Security scans were successful",
+		    attachLog: true
                 }
             }
         }
