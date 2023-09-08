@@ -16,7 +16,8 @@ pipeline {
         stage('Unit and Integration Tests') {
             steps {
                 echo "Run unit tests to ensure the code functions as expected and run integration tests to ensure the different components of the application work together as expected. Tools: JUnit (Unit Tests), Selenium (Integration Tests)"
-                
+                sh 'run_unit_tests.sh > unit_test.log'
+                sh 'run_integration_tests.sh > integration_test.log'
             }
            post {
                 success {
