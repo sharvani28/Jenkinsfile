@@ -4,60 +4,38 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                script {
-                    // Use a build automation tool (e.g., Maven) to compile and package your code
-                    sh 'mvn clean package'
-                }
+                bat 'mvn clean package' // Use 'bat' instead of 'sh' for Windows batch command
             }
         }
         stage('Unit and Integration Tests') {
             steps {
-                script {
-                    // Use test automation tools (e.g., JUnit for unit tests, and Selenium for integration tests)
-                    sh 'run_unit_tests.sh'
-                    sh 'run_integration_tests.sh'
-                }
+                bat 'run_unit_tests.bat' // Use 'bat' for Windows batch command
+                bat 'run_integration_tests.bat' // Use 'bat' for Windows batch command
             }
         }
         stage('Code Analysis') {
             steps {
-                script {
-                    // Use a code analysis tool (e.g., SonarQube) to analyze your code
-                    // You need to have SonarQube server configured and integrated with Jenkins
-                    sh 'sonar-scanner' // Example command for SonarQube analysis
-                }
+                bat 'sonar-scanner.bat' // Use 'bat' for Windows batch command
             }
         }
         stage('Security Scan') {
             steps {
-                script {
-                    // Use a security scanning tool (e.g., OWASP ZAP) to identify vulnerabilities
-                    sh 'run_security_scan.sh'
-                }
+                bat 'run_security_scan.bat' // Use 'bat' for Windows batch command
             }
         }
         stage('Deploy to Staging') {
             steps {
-                script {
-                    // Use a deployment tool or script to deploy to a staging environment (e.g., AWS EC2)
-                    sh 'deploy_to_staging.sh'
-                }
+                bat 'deploy_to_staging.bat' // Use 'bat' for Windows batch command
             }
         }
         stage('Integration Tests on Staging') {
             steps {
-                script {
-                    // Run integration tests on the staging environment to ensure functionality
-                    sh 'run_integration_tests_on_staging.sh'
-                }
+                bat 'run_integration_tests_on_staging.bat' // Use 'bat' for Windows batch command
             }
         }
         stage('Deploy to Production') {
             steps {
-                script {
-                    // Use a deployment tool or script to deploy to a production environment (e.g., AWS EC2)
-                    sh 'deploy_to_production.sh'
-                }
+                bat 'deploy_to_production.bat' // Use 'bat' for Windows batch command
             }
         }
     }
